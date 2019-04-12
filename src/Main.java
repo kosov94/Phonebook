@@ -5,18 +5,19 @@ import java.util.Map;
 public class Main {
     private static HashMap<String, String> pb = new HashMap<>();
 
-    private static void saveTS() throws IOException {
+    private final static void saveTS() throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File("phone.txt")))) {
             for (Map.Entry<String, String> k : pb.entrySet()) {
                 writer.write(k.getKey() + " " + k.getValue() + System.lineSeparator());
             }
             writer.close();
+            System.out.println("Изменения сохранены.");
         } catch (IOException ex) {
             System.out.println("Не удалось сохранить изменения.");
         }
     }
 
-    private static boolean FoundName(String name) {
+    private final static boolean FoundName(String name) {
         boolean flag = false;
         for (Map.Entry entry : pb.entrySet())
             if (entry.getValue().equals(name)) {
@@ -26,7 +27,7 @@ public class Main {
         return flag;
     }
 
-    private static boolean FoundPhone(String phone) {
+    private final static boolean FoundPhone(String phone) {
         for (Map.Entry entry : pb.entrySet())
             if (entry.getKey().equals(phone)) {
                 System.out.println((entry.getValue() + ": " + entry.getKey()));
@@ -35,7 +36,7 @@ public class Main {
         return false;
     }
 
-    public static void main(String[] args) throws IOException {
+    public final static void main(String[] args) throws IOException {
         String act;
         try (BufferedReader reader = new BufferedReader(new FileReader(new File("phone.txt")))) {
 
