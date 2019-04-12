@@ -6,11 +6,14 @@ public class Main {
     private static HashMap<String, String> pb = new HashMap<>();
 
     private static void saveTS() throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(new File("phone.txt")));
-        for (Map.Entry<String, String> k : pb.entrySet()) {
-            writer.write(k.getKey() + " " + k.getValue() + System.lineSeparator());
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File("phone.txt")))) {
+            for (Map.Entry<String, String> k : pb.entrySet()) {
+                writer.write(k.getKey() + " " + k.getValue() + System.lineSeparator());
+            }
+            writer.close();
+        } catch (IOException ex) {
+            System.out.println("Не удалось сохранить изменения.");
         }
-        writer.close();
     }
 
     private static boolean FoundName(String name) {
@@ -103,7 +106,6 @@ public class Main {
                     "\n 5 - удалить запись" +
                     "\n 6 - сохранить изменения" +
                     "\n 7 - выход");
-            ;
             act = bf.readLine();
         }
     }
